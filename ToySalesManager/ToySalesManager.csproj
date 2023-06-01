@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB877091-1A3E-4351-AACC-735444EBF555}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ToySalesManager</RootNamespace>
+    <AssemblyName>ToySalesManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BUS\HoaDonBUS.cs" />
+    <Compile Include="BUS\KhachHangBUS.cs" />
+    <Compile Include="BUS\NCC_LoaiSPBUS.cs" />
+    <Compile Include="BUS\NhanVienBUS.cs" />
+    <Compile Include="BUS\NhapHangBUS.cs" />
+    <Compile Include="BUS\SanPhamBUS.cs" />
+    <Compile Include="DAO\HoaDonDAO.cs" />
+    <Compile Include="DAO\KhachHangDAO.cs" />
+    <Compile Include="DAO\KNCSDL.cs" />
+    <Compile Include="DAO\NCC_LoaiSPDAO.cs" />
+    <Compile Include="DAO\NhanVienDAO.cs" />
+    <Compile Include="DAO\NhapHangDAO.cs" />
+    <Compile Include="DAO\SanPhamDAO.cs" />
+    <Compile Include="DTO\HoaDonDTO.cs" />
+    <Compile Include="DTO\KhachHangDTO.cs" />
+    <Compile Include="DTO\NCC_LoaiSPDTO.cs" />
+    <Compile Include="DTO\NhanVienDTO.cs" />
+    <Compile Include="DTO\NhapHangDTO.cs" />
+    <Compile Include="DTO\SanPhamDTO.cs" />
+    <Compile Include="GUI\CrysHD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrysHD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\CrysTK.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrysTK.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\dsHD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsHD.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\dsTK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTK.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmBanSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBanSanPham.Designer.cs">
+      <DependentUpon>frmBanSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmCrysHD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmCrysHD.Designer.cs">
+      <DependentUpon>frmCrysHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmCrysTK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmCrysTK.Designer.cs">
+      <DependentUpon>frmCrysTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmHoaDon.Designer.cs">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmHome.Designer.cs">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmKhachHang.Designer.cs">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmNhanVien.Designer.cs">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmNhaphang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmNhaphang.Designer.cs">
+      <DependentUpon>frmNhaphang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLLoaiSP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLLoaiSP.Designer.cs">
+      <DependentUpon>frmQLLoaiSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLNCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLNCC.Designer.cs">
+      <DependentUpon>frmQLNCC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLSanPham.Designer.cs">
+      <DependentUpon>frmQLSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmRegister.Designer.cs">
+      <DependentUpon>frmRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmThietlap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmThietlap.Designer.cs">
+      <DependentUpon>frmThietlap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmThongKe.Designer.cs">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\CrysHD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrysHD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CrysTK.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrysTK.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmBanSanPham.resx">
+      <DependentUpon>frmBanSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmCrysHD.resx">
+      <DependentUpon>frmCrysHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmCrysTK.resx">
+      <DependentUpon>frmCrysTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmHoaDon.resx">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmHome.resx">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmKhachHang.resx">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmNhanVien.resx">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmNhaphang.resx">
+      <DependentUpon>frmNhaphang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLLoaiSP.resx">
+      <DependentUpon>frmQLLoaiSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLNCC.resx">
+      <DependentUpon>frmQLNCC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLSanPham.resx">
+      <DependentUpon>frmQLSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmRegister.resx">
+      <DependentUpon>frmRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmThietlap.resx">
+      <DependentUpon>frmThietlap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmThongKe.resx">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="GUI\dsHD.xsc">
+      <DependentUpon>dsHD.xsd</DependentUpon>
+    </None>
+    <None Include="GUI\dsHD.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsHD.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GUI\dsHD.xss">
+      <DependentUpon>dsHD.xsd</DependentUpon>
+    </None>
+    <None Include="GUI\dsTK.xsc">
+      <DependentUpon>dsTK.xsd</DependentUpon>
+    </None>
+    <None Include="GUI\dsTK.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTK.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GUI\dsTK.xss">
+      <DependentUpon>dsTK.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_exit_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_delete_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_minus_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_delete_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_subtract_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_contacts_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_lock_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\logo_nen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_manager_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_sell_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_sell_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_home_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_box_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_hide_32px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_eye_32px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_add_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_reset_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_checked_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_update_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_add_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_cancel_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\imgLoaiSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\imgNCC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_create_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_cancel_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_save_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\paper_money_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_trash_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_delete_bin_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\filter_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\combo_chart_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\purchase_order_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\stocks_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\sales_performance_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_print_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_settings_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_bill_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_management_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\icons8_customer_30px.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
