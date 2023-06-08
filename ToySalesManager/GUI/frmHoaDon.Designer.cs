@@ -66,6 +66,7 @@
             this.btnlammoi = new System.Windows.Forms.Button();
             this.btnInHD = new System.Windows.Forms.Button();
             this.btnLoc = new System.Windows.Forms.Button();
+            this.btnxoa = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -431,12 +432,31 @@
             this.btnLoc.UseVisualStyleBackColor = false;
             this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
+            // btnxoa
+            // 
+            this.btnxoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.btnxoa.FlatAppearance.BorderSize = 0;
+            this.btnxoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnxoa.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnxoa.ForeColor = System.Drawing.Color.White;
+            this.btnxoa.Image = global::ToySalesManager.Properties.Resources.icons8_delete_bin_24px;
+            this.btnxoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnxoa.Location = new System.Drawing.Point(765, 214);
+            this.btnxoa.Name = "btnxoa";
+            this.btnxoa.Size = new System.Drawing.Size(70, 35);
+            this.btnxoa.TabIndex = 17;
+            this.btnxoa.Text = "Xóa";
+            this.btnxoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnxoa.UseVisualStyleBackColor = false;
+            this.btnxoa.Click += new System.EventHandler(this.btnxoa_Click);
+            // 
             // frmHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(998, 558);
+            this.Controls.Add(this.btnxoa);
             this.Controls.Add(this.btnlammoi);
             this.Controls.Add(this.btnInHD);
             this.Controls.Add(this.panel5);
@@ -509,5 +529,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Label lblhd;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnxoa;
     }
 }

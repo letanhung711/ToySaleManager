@@ -130,5 +130,28 @@ namespace ToySalesManager.GUI
                 rp.Show();
             }
         }
+
+        private void btnxoa_Click(object sender, EventArgs e)
+        {
+            if(lblhd.Text=="0")
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                HoaDonDTO hd = new HoaDonDTO();
+                hd.Sohd = int.Parse(lblhd.Text);
+                HoaDonBUS.XoaHD(hd);
+                MessageBox.Show("Xóa hóa đơn thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                lvdh.Items.Clear();
+                txtkh.Clear();
+                txtdiachi.Clear();
+                txtsdt.Clear();
+                lblhd.Text = "0";
+                lvhd.Items.Clear();
+                TT_HD();
+            }
+        }
     }
 }

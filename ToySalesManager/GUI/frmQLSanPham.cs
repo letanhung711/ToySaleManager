@@ -353,27 +353,34 @@ namespace ToySalesManager.GUI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SanPhamDTO sp = new SanPhamDTO();
-            DataTable dt = new DataTable();
-            sp.Tensp = txtSearchSP.Text;
-            lvds.Items.Clear();
-            dt = SanPhamDAO.SearchSPbyMaSP(sp);
-
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (String.IsNullOrWhiteSpace(txtSearchSP.Text))
             {
-                lvds.Items.Add(dt.Rows[i]["MaSP"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["TenSP"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["MaloaiSP"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["DVT"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["MaNCC"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["NgaySX"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["NgayHetHan"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["SoLuong"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["GiaBan"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["GiaNhap"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["LoiNhuan"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["KhuyenMai"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["Hinh"].ToString());
+                MessageBox.Show("Vui lòng nhập tên sản phẩm cần tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                SanPhamDTO sp = new SanPhamDTO();
+                DataTable dt = new DataTable();
+                sp.Tensp = txtSearchSP.Text;
+                lvds.Items.Clear();
+                dt = SanPhamDAO.SearchSPbyMaSP(sp);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    lvds.Items.Add(dt.Rows[i]["MaSP"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["TenSP"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["MaloaiSP"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["DVT"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["MaNCC"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["NgaySX"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["NgayHetHan"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["SoLuong"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["GiaBan"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["GiaNhap"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["LoiNhuan"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["KhuyenMai"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["Hinh"].ToString());
+                }
             }
         }
 

@@ -98,6 +98,7 @@ namespace ToySalesManager.GUI
             {
                 btnNhanVien.Visible = false;
                 btnNhaphang.Visible = false;
+                btnQlSp.Visible = false;
             }
             showInformation();
             OpenChildForm(new frmThongKe());

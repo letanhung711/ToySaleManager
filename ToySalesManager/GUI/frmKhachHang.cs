@@ -122,19 +122,26 @@ namespace ToySalesManager.GUI
 
         private void btnapdung_Click(object sender, EventArgs e)
         {
-            KhachHangDTO kh = new KhachHangDTO();
-            DataTable dt = new DataTable();
-            kh.Hoten = txttkkh.Text;
-            dt = KhachHangDAO.SearchKH(kh);
-            lvds.Items.Clear();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (String.IsNullOrWhiteSpace(txttkkh.Text))
             {
-                lvds.Items.Add(dt.Rows[i]["MaKH"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["HoTenKH"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["SDT"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["DiaChi"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["GioiTinh"].ToString());
-                lvds.Items[i].SubItems.Add(dt.Rows[i]["NgayDangKy"].ToString());
+                MessageBox.Show("Vui lòng nhập tên khách hàng cần tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                KhachHangDTO kh = new KhachHangDTO();
+                DataTable dt = new DataTable();
+                kh.Hoten = txttkkh.Text;
+                dt = KhachHangDAO.SearchKH(kh);
+                lvds.Items.Clear();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    lvds.Items.Add(dt.Rows[i]["MaKH"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["HoTenKH"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["SDT"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["DiaChi"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["GioiTinh"].ToString());
+                    lvds.Items[i].SubItems.Add(dt.Rows[i]["NgayDangKy"].ToString());
+                }
             }
         }
 
@@ -146,12 +153,29 @@ namespace ToySalesManager.GUI
             }
             else
             {
+                DataTable dt = new DataTable();
                 KhachHangDTO kh = new KhachHangDTO();
                 kh.Makh = txtmakh.Text;
-                KhachHangBUS.XoaKH(kh);
-                MessageBox.Show("Xóa khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                dt = HoaDonDAO.TTKHHD(kh);
+                if(dt.Rows.Count==0)
+                {
+                    KhachHangBUS.XoaKH(kh);
+                    MessageBox.Show("Xóa khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xóa khách hàng vì còn ràng buộc dữ liệu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
                 lvds.Items.Clear();
                 TT_KH();
+                txtmakh.Clear();
+                txthoten.Clear();
+                txtsdt.Clear();
+                txtdiachi.Clear();
+                rdnam.Checked = false;
+                rdnu.Checked = false;
+                dtngaydk.ResetText();
             }
         }
 
@@ -173,6 +197,13 @@ namespace ToySalesManager.GUI
                 MessageBox.Show("Cập nhật khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 lvds.Items.Clear();
                 TT_KH();
+                txtmakh.Clear();
+                txthoten.Clear();
+                txtsdt.Clear();
+                txtdiachi.Clear();
+                rdnam.Checked = false;
+                rdnu.Checked = false;
+                dtngaydk.ResetText();
             }
         }
     }

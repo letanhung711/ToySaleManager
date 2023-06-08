@@ -33,5 +33,18 @@ namespace ToySalesManager.BUS
                 MessageBox.Show("Thêm chi tiết hóa đơn mới không thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void XoaHD(HoaDonDTO hd)
+        {
+            try
+            {
+                HoaDonDAO.XoaCTHD(hd);
+                HoaDonDAO.XoaHD(hd);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Xóa hóa đơn không thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

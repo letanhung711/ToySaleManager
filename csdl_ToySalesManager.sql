@@ -198,28 +198,3 @@ insert into HoaDon values (2,'5/10/2023','KH2','NV1',1034380,1100000,0)
 insert into HoaDon values (3,'5/15/2023','KH1','NV1',5210460,5300000,0)
 	--Table CTHD
 	insert into CTHD values (1,3,3,5210460,0,1)
-
-
---truy van
-select * from NhanVien
-select * from HoaDon
-select * from CTHD
-
-select SUM(ThanhTien) as TongTien, Count(hd.SoHD) as SLDH from HoaDon hd  where DaThanhToan = 0 and MONTH(NgayLap) = 5 and YEAR(NgayLap) = 2023
-
-
-select top 5 sp.MaSP , Tensp , GiaBan ,SUM(CTHD.SoLuong) as SL  from CTHD,HoaDon hd,SanPham sp where sp.MaSP=CTHD.MaSP and hd.SoHD=CTHD.SoHD group by sp.MaSP,TenSP,GiaBan order by SL desc
-
-
-select CAST(NgayLap as date) as NgayLap ,SUM(ThanhTien) as TongTien  from HoaDon hd where DaThanhToan=0 and  NgayLap BETWEEN '5/14/2023 00:00:00' and '5/14/2023 23:59:59' Group by CAST(NgayLap as date)
-
-select * from HoaDon
-select * from CTHD
-select * from SanPham
-
-select hd.SoHD,NgayLap,ThanhTien,TenSP,GiaBan,DonGia,CTHD.SoLuong,CTHD.KhuyenMai,nv.HoTen,kh.HoTenKH,(CTHD.SoLuong*DonGia) as TTMH from CTHD,HoaDon hd,SanPham sp,NhanVien nv,KhachHang kh where sp.MaSP=CTHD.MaSP and nv.MaNV=hd.MaNV and kh.MaKH=hd.MaKH and hd.SoHD=CTHD.SoHD and hd.SoHD=2
-
-select hd.SoHD,nv.HoTen,kh.HoTenKH,NgayLap,ThanhTien,IIF(DaThanhToan=0,N'Đã thanh toán',N'Chưa thanh toán') as TrangThai,SUM(SoLuong) as SLMua from HoaDon hd,CTHD,KhachHang kh,NhanVien nv where hd.SoHD=CTHD.SoHD and hd.MaKH=kh.MaKH and hd.MaNV=nv.MaNV and NgayLap BETWEEN '5/10/2023 00:00:00' and '5/10/2023 23:59:59' group by hd.SoHD,CTHD.SoHD,NgayLap,ThanhTien,DaThanhToan,nv.HoTen,kh.HoTenKH
-
-
-select hd.SoHD , kh.MaKH, HoTenKH, DiaChi, SDT, TenSP , CTHD.SoLuong , DonGia , (CTHD.SoLuong * DonGia) as ThanhTien , NgayLap from HoaDon hd, CTHD, KhachHang kh, SanPham sp where sp.MaSP=CTHD.MaSP and kh.MaKH=hd.MaKH and hd.SoHD=CTHD.SoHD and DaThanhToan = 0 and  NgayLap between '5/1/2023 00:00:00' and '5/20/2023 23:59:59' order by NgayLap

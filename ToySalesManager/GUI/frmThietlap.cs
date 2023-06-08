@@ -226,8 +226,6 @@ namespace ToySalesManager.GUI
             txtnhaplaimk.Clear();
             lbl8.Visible = false;
             lblgoiy.Visible = false;
-        }
-
-        
+        }  
     }
 }

@@ -99,6 +99,21 @@ namespace ToySalesManager.DAO
             return dt;
         }
 
+        public static DataTable TTKHHD(KhachHangDTO kh)
+        {
+            string sql = "select * from HoaDon where MaKH='"+kh.Makh+"'";
+            DataTable dt = new DataTable();
+            dt = KNCSDL.readData(sql);
+            return dt;
+        }
+        public static DataTable TTNVHD(NhanVienDTO nv)
+        {
+            string sql = "select * from HoaDon where MaNV='"+nv.Manv+"'";
+            DataTable dt = new DataTable();
+            dt = KNCSDL.readData(sql);
+            return dt;
+        }
+
         public static void ThemHD(HoaDonDTO hd)
         {
             string sql = "insert into HoaDon values ("+hd.Sohd+",'"+hd.Ngaylap+"','"+hd.Makh+"','"+hd.Manv+"',"+hd.Thanhtien+","+hd.Tienkhachtra+","+hd.Dathanhtoan+")";
@@ -107,6 +122,17 @@ namespace ToySalesManager.DAO
         public static void ThemCTHD(HoaDonDTO hd)
         {
             string sql = "insert into CTHD values ("+hd.Stt+","+hd.Sohd+","+hd.Masp+","+hd.Dongia+","+hd.Khuyenmai+","+hd.Sl+")";
+            KNCSDL.executeQuery(sql);
+        }
+
+        public static void XoaCTHD(HoaDonDTO hd)
+        {
+            string sql = "delete from CTHD where SoHD="+hd.Sohd+"";
+            KNCSDL.executeQuery(sql);
+        }
+        public static void XoaHD(HoaDonDTO hd)
+        {
+            string sql = "delete from HoaDon where SoHD="+hd.Sohd+"";
             KNCSDL.executeQuery(sql);
         }
     }

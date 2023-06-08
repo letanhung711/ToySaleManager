@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbcv = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtmk = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtemail = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnlammoi = new System.Windows.Forms.Button();
             this.btncapnhat = new System.Windows.Forms.Button();
             this.btnxoa = new System.Windows.Forms.Button();
@@ -55,15 +61,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
             this.lvds = new System.Windows.Forms.ListView();
-            this.txtemail = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtmk = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cbcv = new System.Windows.Forms.ComboBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -74,6 +72,8 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -111,6 +111,56 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(449, 534);
             this.panel1.TabIndex = 1;
+            // 
+            // cbcv
+            // 
+            this.cbcv.FormattingEnabled = true;
+            this.cbcv.Location = new System.Drawing.Point(168, 401);
+            this.cbcv.Name = "cbcv";
+            this.cbcv.Size = new System.Drawing.Size(200, 25);
+            this.cbcv.TabIndex = 20;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(95, 405);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 17);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Chức Vụ:";
+            // 
+            // txtmk
+            // 
+            this.txtmk.Enabled = false;
+            this.txtmk.Location = new System.Drawing.Point(168, 358);
+            this.txtmk.Name = "txtmk";
+            this.txtmk.Size = new System.Drawing.Size(200, 25);
+            this.txtmk.TabIndex = 18;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(89, 361);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 17);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Mật khẩu:";
+            // 
+            // txtemail
+            // 
+            this.txtemail.Location = new System.Drawing.Point(168, 314);
+            this.txtemail.Name = "txtemail";
+            this.txtemail.Size = new System.Drawing.Size(200, 25);
+            this.txtemail.TabIndex = 16;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(112, 317);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 17);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Email:";
             // 
             // btnlammoi
             // 
@@ -236,6 +286,7 @@
             this.txtsdt.Name = "txtsdt";
             this.txtsdt.Size = new System.Drawing.Size(200, 25);
             this.txtsdt.TabIndex = 7;
+            this.txtsdt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsdt_KeyPress);
             // 
             // label4
             // 
@@ -392,26 +443,6 @@
             this.panel5.Size = new System.Drawing.Size(519, 448);
             this.panel5.TabIndex = 3;
             // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Location = new System.Drawing.Point(3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(513, 30);
-            this.panel6.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(197, 7);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(142, 17);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Danh Sách Nhân Viên";
-            // 
             // lvds
             // 
             this.lvds.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -434,56 +465,6 @@
             this.lvds.UseCompatibleStateImageBehavior = false;
             this.lvds.View = System.Windows.Forms.View.Details;
             this.lvds.Click += new System.EventHandler(this.lvds_Click);
-            // 
-            // txtemail
-            // 
-            this.txtemail.Location = new System.Drawing.Point(168, 314);
-            this.txtemail.Name = "txtemail";
-            this.txtemail.Size = new System.Drawing.Size(200, 25);
-            this.txtemail.TabIndex = 16;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(112, 317);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 17);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Email:";
-            // 
-            // txtmk
-            // 
-            this.txtmk.Enabled = false;
-            this.txtmk.Location = new System.Drawing.Point(168, 358);
-            this.txtmk.Name = "txtmk";
-            this.txtmk.Size = new System.Drawing.Size(200, 25);
-            this.txtmk.TabIndex = 18;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(89, 361);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 17);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Mật khẩu:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(95, 405);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(59, 17);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Chức Vụ:";
-            // 
-            // cbcv
-            // 
-            this.cbcv.FormattingEnabled = true;
-            this.cbcv.Location = new System.Drawing.Point(168, 401);
-            this.cbcv.Name = "cbcv";
-            this.cbcv.Size = new System.Drawing.Size(200, 25);
-            this.cbcv.TabIndex = 20;
             // 
             // columnHeader1
             // 
@@ -530,6 +511,26 @@
             // columnHeader10
             // 
             this.columnHeader10.Text = "Hình";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.panel6.Controls.Add(this.label10);
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(513, 30);
+            this.panel6.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(197, 7);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(142, 17);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Danh Sách Nhân Viên";
             // 
             // frmNhanVien
             // 

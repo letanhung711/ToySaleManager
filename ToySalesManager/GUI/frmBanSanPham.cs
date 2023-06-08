@@ -45,6 +45,35 @@ namespace ToySalesManager.GUI
             }
         }
 
+        bool Check()
+        {
+            if (String.IsNullOrWhiteSpace(txttenKH.Text))
+            {
+                MessageBox.Show("Vui lòng nhập khách hàng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txttenKH.Focus();
+                return false;
+            }
+    
+            if (txtSDT.TextLength < 10 || txtSDT.TextLength > 10 || String.IsNullOrWhiteSpace(txtSDT.Text))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSDT.Focus();
+                return false;
+            }
+            if (lvgiohang.Items.Count==0)
+            {
+                MessageBox.Show("Chưa có sản phẩm trong giỏ hàng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(txttienkhtra.Text))
+            {
+                MessageBox.Show("Khách hàng chưa thanh toán.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txttenKH.Focus();
+                return false;
+            }
+            return true;
+        }
+
         // hàm kiểm tra số lượng
         int Kiemtra(string masp)
         {
@@ -236,94 +265,101 @@ namespace ToySalesManager.GUI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            SanPhamDTO sp = new SanPhamDTO();
-            sp.Tensp = txtsearchSP.Text;
-            dt = SanPhamDAO.SearchSPbyMaSP(sp);
-            flpSanpham.Controls.Clear();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (String.IsNullOrWhiteSpace(txtsearchSP.Text))
             {
-                Panel p = new Panel();
-                p.BorderStyle = BorderStyle.FixedSingle;
-                p.Margin = new Padding(5, 5, 10, 5);
-                p.Width = 145; p.Height = 185;
-
-                //ten sp
-                Label ten = new Label();
-                ten.Height = 30;
-                ten.Text = dt.Rows[i][1].ToString();
-                ten.Dock = DockStyle.Top;
-                ten.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
-                ten.ForeColor = Color.Black;
-                ten.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-
-                //gia chua tinh km
-                Label gia = new Label();
-                gia.Height = 10;
-                gia.Text = string.Format("{0:n0} VND", long.Parse(dt.Rows[i][8].ToString()));
-                gia.Dock = DockStyle.Bottom;
-                gia.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
-                gia.ForeColor = Color.Black;
-                gia.Font = new System.Drawing.Font("Segoe UI", 7F, (System.Drawing.FontStyle.Strikeout));
-
-                //gia da tinh km
-                Label giakm = new Label();
-                if (int.Parse(dt.Rows[i][11].ToString()) == 0)
+                MessageBox.Show("Vui lòng nhập tên sản phẩm cần tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                SanPhamDTO sp = new SanPhamDTO();
+                sp.Tensp = txtsearchSP.Text;
+                dt = SanPhamDAO.SearchSPbyMaSP(sp);
+                flpSanpham.Controls.Clear();
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    giakm.Text = string.Format("{0:n0} VND", long.Parse(dt.Rows[i][8].ToString()));
-                }
-                else
-                {
-                    int sokm = (100 - (int.Parse(dt.Rows[i][11].ToString()))) % 100;
-                    long giadakm = (long.Parse(dt.Rows[i][8].ToString()) * sokm) / 100;
-                    giakm.Text = string.Format("{0:n0} VND", giadakm);
-                }
-                giakm.Height = 20;
-                giakm.Dock = DockStyle.Bottom;
-                giakm.TextAlign = ContentAlignment.MiddleCenter; // căn chữ
-                giakm.ForeColor = Color.FromArgb(250, 100, 0);
+                    Panel p = new Panel();
+                    p.BorderStyle = BorderStyle.FixedSingle;
+                    p.Margin = new Padding(5, 5, 10, 5);
+                    p.Width = 145; p.Height = 185;
 
-                //anh sp
-                PictureBox pic = new PictureBox();
-                pic.Width = 140; pic.Height = 100; // set kích thước của ảnh
-                try
-                {
-                    pic.Load(path + "sanpham" + dt.Rows[i]["MaSP"] + ".jpg");
-                }
-                catch
-                {
-                    pic.Load(path + "null.jpg");
-                }
-                pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic.Dock = DockStyle.Top;
-                pic.Tag = dt.Rows[i][0].ToString();
-                pic.Click += new EventHandler(Onclick); // sự kiện click
+                    //ten sp
+                    Label ten = new Label();
+                    ten.Height = 30;
+                    ten.Text = dt.Rows[i][1].ToString();
+                    ten.Dock = DockStyle.Top;
+                    ten.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
+                    ten.ForeColor = Color.Black;
+                    ten.Font = new System.Drawing.Font("Segoe UI", 8.25F);
 
-                //so luong sp
-                Label sl = new Label();
-                sl.Height = 20;
-                sl.Text = "Sẵn có: " + dt.Rows[i][7].ToString();
-                sl.Dock = DockStyle.Bottom;
-                sl.TextAlign = ContentAlignment.MiddleRight;   // căn chữ
-                sl.ForeColor = Color.Black;
-                sl.Font = new System.Drawing.Font("Segoe UI", 7F);
-                //khuyen mai
-                Label km = new Label();
-                km.Left = 110;
-                km.Size = new Size(30, 30);
-                km.Text = dt.Rows[i][11].ToString() + "%";
-                km.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
-                km.ForeColor = Color.White;
-                km.BackColor = Color.Red;
-                km.Font = new System.Drawing.Font("Segoe UI", 8.25F, (System.Drawing.FontStyle.Bold));
+                    //gia chua tinh km
+                    Label gia = new Label();
+                    gia.Height = 10;
+                    gia.Text = string.Format("{0:n0} VND", long.Parse(dt.Rows[i][8].ToString()));
+                    gia.Dock = DockStyle.Bottom;
+                    gia.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
+                    gia.ForeColor = Color.Black;
+                    gia.Font = new System.Drawing.Font("Segoe UI", 7F, (System.Drawing.FontStyle.Strikeout));
 
-                p.Controls.Add(ten);    // add tên vào panel
-                p.Controls.Add(gia);    // add giá vào panel
-                p.Controls.Add(giakm);  // add giá da km vào panel
-                p.Controls.Add(pic);    // add tên vào panel
-                p.Controls.Add(sl);     // add sl vào panel
-                pic.Controls.Add(km);   // add km vào panel
-                flpSanpham.Controls.Add(p);  // add panel vào FlowlayoutPanel
+                    //gia da tinh km
+                    Label giakm = new Label();
+                    if (int.Parse(dt.Rows[i][11].ToString()) == 0)
+                    {
+                        giakm.Text = string.Format("{0:n0} VND", long.Parse(dt.Rows[i][8].ToString()));
+                    }
+                    else
+                    {
+                        int sokm = (100 - (int.Parse(dt.Rows[i][11].ToString()))) % 100;
+                        long giadakm = (long.Parse(dt.Rows[i][8].ToString()) * sokm) / 100;
+                        giakm.Text = string.Format("{0:n0} VND", giadakm);
+                    }
+                    giakm.Height = 20;
+                    giakm.Dock = DockStyle.Bottom;
+                    giakm.TextAlign = ContentAlignment.MiddleCenter; // căn chữ
+                    giakm.ForeColor = Color.FromArgb(250, 100, 0);
+
+                    //anh sp
+                    PictureBox pic = new PictureBox();
+                    pic.Width = 140; pic.Height = 100; // set kích thước của ảnh
+                    try
+                    {
+                        pic.Load(path + "sanpham" + dt.Rows[i]["MaSP"] + ".jpg");
+                    }
+                    catch
+                    {
+                        pic.Load(path + "null.jpg");
+                    }
+                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pic.Dock = DockStyle.Top;
+                    pic.Tag = dt.Rows[i][0].ToString();
+                    pic.Click += new EventHandler(Onclick); // sự kiện click
+
+                    //so luong sp
+                    Label sl = new Label();
+                    sl.Height = 20;
+                    sl.Text = "Sẵn có: " + dt.Rows[i][7].ToString();
+                    sl.Dock = DockStyle.Bottom;
+                    sl.TextAlign = ContentAlignment.MiddleRight;   // căn chữ
+                    sl.ForeColor = Color.Black;
+                    sl.Font = new System.Drawing.Font("Segoe UI", 7F);
+                    //khuyen mai
+                    Label km = new Label();
+                    km.Left = 110;
+                    km.Size = new Size(30, 30);
+                    km.Text = dt.Rows[i][11].ToString() + "%";
+                    km.TextAlign = ContentAlignment.MiddleCenter;   // căn chữ
+                    km.ForeColor = Color.White;
+                    km.BackColor = Color.Red;
+                    km.Font = new System.Drawing.Font("Segoe UI", 8.25F, (System.Drawing.FontStyle.Bold));
+
+                    p.Controls.Add(ten);    // add tên vào panel
+                    p.Controls.Add(gia);    // add giá vào panel
+                    p.Controls.Add(giakm);  // add giá da km vào panel
+                    p.Controls.Add(pic);    // add tên vào panel
+                    p.Controls.Add(sl);     // add sl vào panel
+                    pic.Controls.Add(km);   // add km vào panel
+                    flpSanpham.Controls.Add(p);  // add panel vào FlowlayoutPanel
+                }
             }
         }
 
@@ -564,102 +600,105 @@ namespace ToySalesManager.GUI
         }
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
-            DateTime dtn = DateTime.Now;   // lấy ngày giờ ở hiện tại
-            HoaDonDTO hd = new HoaDonDTO();
-            KhachHangDTO kh = new KhachHangDTO();
-            SanPhamDTO sp = new SanPhamDTO();
-
-            //Khách Hàng
-            DataTable dtkh = new DataTable();
-            dtkh = KhachHangDAO.TTKH();
-            int stt_kh = dtkh.Rows.Count;
-
-            if (stt_kh == 0)
+            if (Check())
             {
-                kh.Makh = "KH1";
-            }
-            else
-            {
-                dtkh = KhachHangDAO.MaKH_Max();
-                string makh = dtkh.Rows[0][0].ToString();
-                kh.Makh = (int.Parse(makh.Substring(makh.Length - 1, 1)) + 1).ToString("KH0");
-            }
-            kh.Hoten = txttenKH.Text;
-            kh.Sdt = txtSDT.Text;
-            kh.Ngaydangky = dtn.ToString("MM/dd/yyyy");
-            KhachHangBUS.ThemKH(kh);
+                DateTime dtn = DateTime.Now;   // lấy ngày giờ ở hiện tại
+                HoaDonDTO hd = new HoaDonDTO();
+                KhachHangDTO kh = new KhachHangDTO();
+                SanPhamDTO sp = new SanPhamDTO();
 
-            //HoaDon
-            DataTable dthd = new DataTable();
-            dthd = HoaDonDAO.TTHD();
-            int stt_hd = dthd.Rows.Count;
+                //Khách Hàng
+                DataTable dtkh = new DataTable();
+                dtkh = KhachHangDAO.TTKH();
+                int stt_kh = dtkh.Rows.Count;
 
-            if (stt_hd == 0)
-            {
-                hd.Sohd = 1;
-            }
-            else
-            {
-                dthd = HoaDonDAO.SoHD_Max();
-                string sohd = dthd.Rows[0][0].ToString();
-                hd.Sohd = int.Parse(sohd) + 1;
-            }
-            hd.Ngaylap= dtn.ToString("MM/dd/yyyy");
-            hd.Makh = kh.Makh;
-            hd.Manv = manv;
-            hd.Thanhtien = int.Parse(lbltongHD.Text.Replace(",", "").Replace(" VND", ""));
-            hd.Tienkhachtra = int.Parse(txttienkhtra.Text);
-            if (chkdathanhtoan.Checked == true)
-                hd.Dathanhtoan = 0;
-            else
-                hd.Dathanhtoan = 1;
-           HoaDonBUS.ThemHD(hd);
-
-            //CTHD
-            int stt = 1;
-            for(int i=0;i<lvgiohang.Items.Count;i++)
-            {
-                hd.Stt = stt;
-                hd.Masp= int.Parse(lvgiohang.Items[i].SubItems[5].Text);
-                hd.Dongia= int.Parse(lvgiohang.Items[i].SubItems[1].Text.Replace(",", ""));
-                hd.Khuyenmai= int.Parse(lvgiohang.Items[i].SubItems[2].Text);
-                hd.Sl= int.Parse(lvgiohang.Items[i].SubItems[3].Text);
-                HoaDonBUS.ThemCTHD(hd);
-                stt++;
-            }
-
-            //Cập nhật lại số lượng sản phẩm
-            DataTable dt = new DataTable();
-            dt = HoaDonDAO.TTCTHD(hd);
-
-            DataTable dtsp = new DataTable();
-            dtsp = SanPhamDAO.TTSP();
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                for (int j = 0; j < dtsp.Rows.Count; j++)
+                if (stt_kh == 0)
                 {
-                    if (dt.Rows[i]["MaSP"].ToString() == dtsp.Rows[j]["MaSP"].ToString())
+                    kh.Makh = "KH1";
+                }
+                else
+                {
+                    dtkh = KhachHangDAO.MaKH_Max();
+                    string makh = dtkh.Rows[0][0].ToString();
+                    kh.Makh = (int.Parse(makh.Substring(makh.Length - 1, 1)) + 1).ToString("KH0");
+                }
+                kh.Hoten = txttenKH.Text;
+                kh.Sdt = txtSDT.Text;
+                kh.Ngaydangky = dtn.ToString("MM/dd/yyyy");
+                KhachHangBUS.ThemKH(kh);
+
+                //HoaDon
+                DataTable dthd = new DataTable();
+                dthd = HoaDonDAO.TTHD();
+                int stt_hd = dthd.Rows.Count;
+
+                if (stt_hd == 0)
+                {
+                    hd.Sohd = 1;
+                }
+                else
+                {
+                    dthd = HoaDonDAO.SoHD_Max();
+                    string sohd = dthd.Rows[0][0].ToString();
+                    hd.Sohd = int.Parse(sohd) + 1;
+                }
+                hd.Ngaylap = dtn.ToString("MM/dd/yyyy");
+                hd.Makh = kh.Makh;
+                hd.Manv = manv;
+                hd.Thanhtien = int.Parse(lbltongHD.Text.Replace(",", "").Replace(" VND", ""));
+                hd.Tienkhachtra = int.Parse(txttienkhtra.Text);
+                if (chkdathanhtoan.Checked == true)
+                    hd.Dathanhtoan = 0;
+                else
+                    hd.Dathanhtoan = 1;
+                HoaDonBUS.ThemHD(hd);
+
+                //CTHD
+                int stt = 1;
+                for (int i = 0; i < lvgiohang.Items.Count; i++)
+                {
+                    hd.Stt = stt;
+                    hd.Masp = int.Parse(lvgiohang.Items[i].SubItems[5].Text);
+                    hd.Dongia = int.Parse(lvgiohang.Items[i].SubItems[1].Text.Replace(",", ""));
+                    hd.Khuyenmai = int.Parse(lvgiohang.Items[i].SubItems[2].Text);
+                    hd.Sl = int.Parse(lvgiohang.Items[i].SubItems[3].Text);
+                    HoaDonBUS.ThemCTHD(hd);
+                    stt++;
+                }
+
+                //Cập nhật lại số lượng sản phẩm
+                DataTable dt = new DataTable();
+                dt = HoaDonDAO.TTCTHD(hd);
+
+                DataTable dtsp = new DataTable();
+                dtsp = SanPhamDAO.TTSP();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dtsp.Rows.Count; j++)
                     {
-                        sl = int.Parse(dtsp.Rows[j]["SoLuong"].ToString()) - int.Parse(dt.Rows[i]["SoLuong"].ToString());
-                        sp.Masp = int.Parse(dt.Rows[i]["MaSP"].ToString());
-                        sp.Soluong = sl;
-                        NhapHangBUS.capnhatsl(sp);
+                        if (dt.Rows[i]["MaSP"].ToString() == dtsp.Rows[j]["MaSP"].ToString())
+                        {
+                            sl = int.Parse(dtsp.Rows[j]["SoLuong"].ToString()) - int.Parse(dt.Rows[i]["SoLuong"].ToString());
+                            sp.Masp = int.Parse(dt.Rows[i]["MaSP"].ToString());
+                            sp.Soluong = sl;
+                            NhapHangBUS.capnhatsl(sp);
+                        }
                     }
                 }
-            }
-            
-            MessageBox.Show("Thanh toán thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-            txttenKH.Clear();
-            txtSDT.Clear();
-            lvgiohang.Items.Clear();
-            lbltongHD.Text = "0 VND";
-            txttienkhtra.Clear();
-            txttienthua.Clear();
-            chkdathanhtoan.Checked = false;
-            flpSanpham.Controls.Clear();
-            Load_dsSP();
+                MessageBox.Show("Thanh toán thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                txttenKH.Clear();
+                txtSDT.Clear();
+                lvgiohang.Items.Clear();
+                lbltongHD.Text = "0 VND";
+                txttienkhtra.Clear();
+                txttienthua.Clear();
+                chkdathanhtoan.Checked = false;
+                flpSanpham.Controls.Clear();
+                Load_dsSP();
+            }
         }
     }
 }
